@@ -1,0 +1,95 @@
+Algoritmo 
+// ______________________________________ Enunciado _____________________________________
+procedimento enunciado()
+Var
+Inicio
+escreval("----------------------------------------------------------------------------------------------------")
+escreval("                     Algoritmo para controle de abastecimento das aeronaves                     ")
+escreval("----------------------------------------------------------------------------------------------------")
+escreval("Bem vindo usuario! Por favor responda as seguintes informações:")
+fim_procedimento
+// _____________________________________ Dados do voo ____________________________________
+	  procedimento dados()
+	  Var
+	  Inicio
+escreva("- A média da aeronave em litros por quilômetros: ")
+leia(media_aero)
+escreva("- A capacidade máxima em litros do tanque: ")
+leia(cap_max)
+escreva("- A quantidade de quilômetros do trecho planejado: ")
+leia(trecho_plan)
+escreva("- A quantidade de quilômetros do trecho alternativo: ")
+leia(trecho_alte)
+escreva("- A quantidade de combustível já na aeronave: ")
+leia(cbus_tanque)
+escreval("----------------------------------------------------------------------------------------------------")
+fim_procedimento
+// ___________________________________ Soma dos trechos ___________________________________
+funcao somartrechos():real
+Var
+somar: real
+Inicio
+somar ←  trecho_plan + trecho_alte
+retorne somar
+fim_funcao
+// _________________________________ Margem de segurança _________________________________
+funcao marseguranca(): real
+Var
+seguranca: real
+Inicio
+seguranca ← trecho_total + (trecho_total * 30/100)
+retorne seguranca
+fim_funcao
+// ____________________________________ Combustivel _____________________________________
+funcao combustivel(): real
+Var
+liquido: real
+Inicio
+liquido ←  margem * media_aero
+retorne liquido
+fim_funcao
+// ___________________________________ Abastecimento ____________________________________
+funcao abastecimento(): real
+Var
+comb: real
+Inicio
+comb ←  qnt_cbus - cbus_tanque
+retorne comb
+fim_funcao
+// ____________________________________________________________________________________
+Var
+media_aero, cap_max, trecho_plan, trecho_alte, cbus_tanque: real
+trecho_total, margem, qnt_cbus, abast: real
+Inicio
+enunciado()
+dados()
+escreval("Processando ...")
+escreval("")
+trecho_total ←  somartrechos()
+margem ← marseguranca()
+qnt_cbus ← combustivel()
+abast ←  abastecimento()
+// __________________________________ Voo reprovado _____________________________________
+se (qnt_cbus > cap_max) entao
+escreval("- Voo Reprovado, reveja seu planejamento!")
+escreval("----------------------------------------------------------------------------------------------------")
+escreval("- O plano de voo considerando a rota alternativa é", trecho_total," km")
+escreval("- A quantidade de combustível necessária para o trecho é", qnt_cbus," litros")
+escreval("- E a capacidade maxima do tanque é", cap_max," litros")
+escreval("- A quantidade de combustível necessária ultrapassou", qnt_cbus - cap_max," litros da 	         capacidade do tanque da aeronave")
+escreval("----------------------------------------------------------------------------------------------------")
+// __________________________________ Voo aprovado _____________________________________
+senao
+escreval("- Voo Aprovado, bom voo!")
+escreval("----------------------------------------------------------------------------------------------------")
+escreval("Então ...")
+escreval("- O trecho principal para o voo é", trecho_plan," km")
+escreval("- O trecho alternativo para o voo é", trecho_alte," km")
+escreval("- O trecho total considerando a rota alternativa é", trecho_total," km")
+escreval("- O total do trecho com a margem de segurança é", margem," km")
+escreval("- A quantidade de combustível necessária para o trecho é", qnt_cbus," litros")
+escreval("- A quantidade de combustível necessária para o abastecimento da aeronave é", abast," 
+litros")
+escreval("----------------------------------------------------------------------------------------------------")
+fim_se
+Fim
